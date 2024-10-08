@@ -14,6 +14,11 @@
 Agents are companies competing in an oligopoly over multiple rounds:
 #image("resources/dynamic_oligopoly_algorithm.png", width: 90%)
 
+The dropout mechanism removes unprofitable companies from the game
+
+#sym.arrow.r.double *Discontinuous game dynamics*
+
+Analytical solutions unknown with dropouts
 = Equilibrium Learning
 We search *Nash equilibria* as fixed points of the game where no player gains by deviating:
 
@@ -40,3 +45,14 @@ $
 // $
 //    cal(L )_("bf,norm")         & =  frac(cal(L )_("bf"),sum _(i  in  cal(N )) max _(pi _(i ) in  Sigma _(i )^(K )) U _(i )\(pi _(i )\,pi _(- i )\))
 // $
+
+= Results
+Setup:
+- $N=3$ companies, $T=4$ rounds
+- Company $0$ can produce at a lower cost
+
+Findings: 
+- Firm $0$ learns predatory pricing
+- The result is a verified Nash equilibrium
+
+#image("resources/predatory_strategy.png", width: 90%)
