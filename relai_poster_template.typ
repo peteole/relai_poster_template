@@ -1,3 +1,5 @@
+
+#import "@preview/cades:0.3.0": qr-code
 #let sponsored_by() = {
   grid(
     columns: (55mm,55mm,55mm),
@@ -16,7 +18,11 @@
 #let universities() = {
   image(height: 30mm, "resources/university_logos.png")
 }
-#let poster(doc, title_name) = {
+#let poster(
+  doc,
+  title_name,
+  paper_url: "",
+) = {
   set text(
     font: ("Maven Pro", "Arial"),
     fallback: true,
@@ -31,13 +37,28 @@
   set page(
     paper: "a1",
     flipped: true,
-    header: grid(
-      columns: (310mm,auto),
-      rows: (150mm),
-      align: (top + left,horizon + center),
-      image("resources/relai_logo.png", height: 100%),
-      text(size: 80pt, weight: "bold", title_name),
-    ),
+    header: [
+      #grid(
+        columns: (310mm,auto),
+        rows: (150mm),
+        align: (top + left,horizon + center),
+        image("resources/relai_logo.png", height: 100%),
+        text(size: 80pt, weight: "bold", title_name),
+      )
+      #if paper_url != "" {
+        place(
+          horizon + right,
+          dx: 15mm,
+          grid(
+            columns: (30mm),
+            align: center,
+            gutter: 5mm,
+            qr-code(paper_url, width: 30mm),
+            link(paper_url, text(paper_url, size: 9pt)),
+          ),
+        )
+      }
+    ],
     footer: pad(
       left: X_PAGE_MARGIN,
       grid(

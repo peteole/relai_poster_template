@@ -1,7 +1,10 @@
 #import "../relai_poster_template.typ": poster
-#import "@preview/algo:0.3.3": algo, i, d, comment, code
 
-#show: doc => poster(doc, "Deep Reinforcement Learning Agents learn Predatory Pricing")
+#show: doc => poster(
+  doc,
+  "Deep Reinforcement Learning Agents learn Predatory Pricing",
+  // paper_url: "https://arxiv.org/abs/..."
+)
 
 = Motivation
 
@@ -23,7 +26,7 @@ Analytical solutions unknown with dropouts
 We search *Nash equilibria* as fixed points of the game where no player gains by deviating:
 
 $
-sup _(pi _(i ) in  Sigma _(i ) )U _(i )\(pi _(i )\,pi ^(\*)_(- i )\) -  U _(i )\(pi ^(\*)_(cal(N ))\) <=  epsilon  quad  forall  i  in  cal(N )
+sup _(pi _(i ) in Sigma _(i ) )U _(i )\(pi _(i )\,pi ^(\*)_(- i )\) - U _(i )\(pi ^(\*)_(cal(N))\) <= epsilon quad forall i in cal(N)
 $
 
 Each company is controlled by an RL agent aiming to maximize its profit:
@@ -33,13 +36,13 @@ Each company is controlled by an RL agent aiming to maximize its profit:
 We use REINFORCE (or its variants) to update all agents' policies simultaneously:
 
 $
-theta _(i ) <-  theta _(i ) +  alpha  nabla _(theta _(i )) U _(i )\(pi _(theta _(i ))\,\{ pi _(theta _(j ))\} _(j in  cal(N )without  \{ i \} )\)
+theta _(i ) <- theta _(i ) + alpha nabla _(theta _(i )) U _(i )\(pi _(theta _(i ))\,\{ pi _(theta _(j ))\} _(j in cal(N)without \{ i \} )\)
 $
 
 We hope this procedure converges to a Nash equilibrium, as measured by:
 
 $
-  cal(L )_("bf")= sum _(i  in  cal(N )) sup _(pi _(i ) in  Sigma _(i )^(K )) U _(i )\(pi _(i )\,pi _(- i )\) -  U _(i )\(pi _(i )\,pi _(- i )\)
+cal(L)_("bf")= sum _(i in cal(N)) sup _(pi _(i ) in Sigma _(i )^(K )) U _(i )\(pi _(i )\,pi _(- i )\) - U _(i )\(pi _(i )\,pi _(- i )\)
 $
 
 // $
@@ -51,8 +54,8 @@ Setup:
 - $N=3$ companies, $T=4$ rounds
 - Company $0$ can produce at a lower cost
 
-Findings: 
-- Firm $0$ learns predatory pricing
+Findings:
+- Firm $0$ learns *predatory pricing*
 - The result is a verified Nash equilibrium
 
 #image("resources/predatory_strategy.png", width: 90%)
