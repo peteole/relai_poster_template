@@ -1,6 +1,19 @@
+#let sponsored_by() = {
+  grid(columns: (55mm,55mm,55mm),rows: (25mm),
+    [#align(left,text(size: 9.4pt,"relAI is supported by the DAAD programme Konrad Zuse Schools of Excellence in Artificial Intelligence, sponsored by the Federal Ministry of Education and Research."))],
+    image("resources/bmbf.jpg", height: 2.5cm),
+    image("resources/zuse_schools.jpg", height: 2.5cm)
+  )
+}
+
+#let X_PAGE_MARGIN = 59.4mm
+
+#let universities() = {
+  image(height: 30mm,"resources/university_logos.png")
+}
 #let poster(doc, title_name) = {
   set text(
-    font: "Linux Libertine",
+    font: "Maven Pro",
     size: 30pt,
   )
   show heading.where(
@@ -10,26 +23,26 @@
     #it
   ]
   set page(
-    paper: "a0",
+    paper: "a1",
     flipped: true,
     header: grid(
-      columns: (40cm,auto),
-      align: (top,center),
-      image("resources/relai_logo.png", height: 20cm),
-      text(size: 120pt,font:"Times new roman",weight: 900,title_name)
+      columns: (310mm,auto),
+      rows: (150mm),
+      align: (top+left,horizon+center),
+      image("resources/relai_logo.png", height: 100%),
+      text(size: 80pt,weight: 900,title_name)
     ),
-    footer: grid(
-      columns: (50%,25%,10%,5%,10%),
-      align: center,
-      image("resources/university_logos.png", height: 3cm),
-      [],
-      [#align(left,text(size:12pt,lorem(20)))],
-      image("resources/BMBF_gefordert-vom_englisch.png", height: 3cm),
-      image("resources/DAAD-Zuse-Logo_230_400px.jpg", height: 3cm)
+    footer: pad(left:X_PAGE_MARGIN,grid(
+        columns: (50%,50%),
+        align: (left,right),
+        universities(),
+        sponsored_by()
+      )
     ),
-    margin: (x: 0cm, top: 22cm)
+    margin: (left: 0cm, top: 166.66mm, right: X_PAGE_MARGIN)
+    
   )
-  pad(x:5cm,columns(3,doc))
+  pad(left:X_PAGE_MARGIN,columns(3,gutter: 30mm, doc))
 }
 #show: doc => poster(doc,"Headline in one or two lines. What will come here?")
 
@@ -41,11 +54,4 @@
 #lorem(150)
 = Example subheadline
 
-#lorem(150)
-
-= Example subheadline
-#lorem(150)
-= Example subheadline
-#lorem(150)
-= Example subheadline
-#lorem(150)
+#lorem(50)
