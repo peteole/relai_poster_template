@@ -67,7 +67,7 @@ $
 *Setup*
 - $N=3$ companies, $T=4$ rounds
 - Proximal Policy Optimization (PPO) for RL
-- Company $0$ can produce at a lower cost
+- Company $0$ produces cheaper than $1$ and $2$
 
 *Findings*
 - Firm $0$ learns *predatory pricing*, first lowering prices to drive out competitors
