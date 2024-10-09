@@ -2,8 +2,19 @@
 
 #show: doc => poster(
   doc,
-  "Deep Reinforcement Learning Agents learn Predatory Pricing",
-  // paper_url: "https://arxiv.org/abs/..."
+  text("Deep Reinforcement Learning Agents learn Predatory Pricing", size: 60pt, weight: "bold"),
+  flipped: false,
+  n_columns: 2,
+  authors: (
+    ("name": "Ole Petersen", "affiliation": "TUM", "email": "ole.petersen@tum.de"),
+    ("name": "Fabian Raoul Pieroth", "affiliation": "TUM", "email": "fabian.pieroth@tum.de"),
+    ("name": "Martin Bichler", "affiliation": "TUM", "email": "bichler@in.tum.de")
+  ),
+  references: (
+    ("url": "https://zuseschoolrelai.de", "label": "zuseschoolrelai.de"),
+    //("url": "https://arxiv.org/abs/...", "label": "ArXiv"),
+  ),
+  font_size: 30pt,
 )
 
 = Motivation
@@ -21,15 +32,21 @@ The dropout mechanism removes unprofitable companies from the game
 
 #sym.arrow.r.double *Discontinuous game dynamics*
 
-Analytical solutions unknown with dropouts
+#sym.arrow.r.double no analytical solutions with dropouts
+
 = Equilibrium Learning
-We search *Nash equilibria* as fixed points of the game where no player gains by deviating:
+*Nash equilibria* (NE) are strategy fixed points where no player gains by deviating:
 
 $
 sup _(pi _(i ) in Sigma _(i ) )U _(i )\(pi _(i )\,pi ^(\*)_(- i )\) - U _(i )\(pi ^(\*)_(cal(N))\) <= epsilon quad forall i in cal(N)
 $
+Proximity to equilibrium is measured by
+$
+cal(L)_("bf")= sum _(i in cal(N)) sup _(pi _(i ) in Sigma _(i )^(K )) U _(i )\(pi _(i )\,pi _(- i )\) - U _(i )\(pi _(i )\,pi _(- i )\)
+$
+where $sup _(pi _(i ) in Sigma _(i )^(K )) U _(i )\(pi _(i )\,pi _(- i )\)$ is approximated by a brute force algorithm.
 
-Each company is controlled by an RL agent aiming to maximize its profit:
+Each company is controlled by a RL agent aiming to maximize its profit:
 
 #image("resources/equilibrium_learning.svg", width: 100%)
 
@@ -39,23 +56,25 @@ $
 theta _(i ) <- theta _(i ) + alpha nabla _(theta _(i )) U _(i )\(pi _(theta _(i ))\,\{ pi _(theta _(j ))\} _(j in cal(N)without \{ i \} )\)
 $
 
-We hope this procedure converges to a Nash equilibrium, as measured by:
+#sym.arrow.r.double Hopefully converges to NE
 
-$
-cal(L)_("bf")= sum _(i in cal(N)) sup _(pi _(i ) in Sigma _(i )^(K )) U _(i )\(pi _(i )\,pi _(- i )\) - U _(i )\(pi _(i )\,pi _(- i )\)
-$
 
 // $
 //    cal(L )_("bf,norm")         & =  frac(cal(L )_("bf"),sum _(i  in  cal(N )) max _(pi _(i ) in  Sigma _(i )^(K )) U _(i )\(pi _(i )\,pi _(- i )\))
 // $
 
 = Results
-Setup:
+*Setup*
 - $N=3$ companies, $T=4$ rounds
+- Proximal Policy Optimization (PPO) for RL
 - Company $0$ can produce at a lower cost
 
-Findings:
-- Firm $0$ learns *predatory pricing*
-- The result is a verified Nash equilibrium
+*Findings*
+- Firm $0$ learns *predatory pricing*, first lowering prices to drive out competitors
+- The result is a verified approximate NE
 
 #image("resources/predatory_strategy.png", width: 90%)
+
+*Broader implications*
+- Our methodology finds approximate NE complex games without analytical solutions
+- Brute-force verification is required due to lack of convergence guarantees in MARL
