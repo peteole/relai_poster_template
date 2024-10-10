@@ -11,5 +11,5 @@ exclude = ["**/*.pdf","examples"]
 
 [template]
 path = "."
-entrypoint = "main.typ"
+entrypoint = "poster.typ"
 thumbnail = "thumbnail.png"
