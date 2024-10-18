@@ -8,8 +8,8 @@
       left,
       text(size: 9.4pt, "relAI is supported by the DAAD programme Konrad Zuse Schools of Excellence in Artificial Intelligence, sponsored by the Federal Ministry of Education and Research."),
     ),
-    image("resources/bmbf.jpg", height: 2.5cm),
-    image("resources/zuse_schools.jpg", height: 2.5cm),
+    image("resources/bmbf.png", height: 2.5cm),
+    image("resources/zuse_schools.png", height: 2.5cm),
   )
 }
 #let qr_reference(url:"", label:"") = {
