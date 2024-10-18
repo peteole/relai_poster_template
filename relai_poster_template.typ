@@ -84,6 +84,7 @@
             gutter: 10mm,
             align: horizon + center,
             ..authors.map(author => [
+                #set text(top-edge: 0em, bottom-edge: 0em)
                 #text(author.name, size: 20pt)\
                 #text(author.affiliation, size: 15pt)\
                 #text(author.email, size: 15pt)
